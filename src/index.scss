@@ -1,0 +1,406 @@
+$primary-color: #4169E1;
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.buttonPath-head,
+.button-login-admin {
+  background-color: $primary-color;
+  color: white;
+  width: 120px;
+  height: 42px;
+  border: none;
+  border-radius: 4px;
+  margin: 5px 5px;
+  cursor: pointer;
+}
+
+.buttonPath-head-logout {
+  background-color: red;
+  color: white;
+  width: 120px;
+  height: 42px;
+  border: none;
+  border-radius: 4px;
+  margin: 5px 5px;
+  cursor: pointer;
+}
+
+.form-login-admin {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.input-login-admin,
+.container-phoneVerification-in-input,
+.container-sign-in-input {
+  width: 320px;
+  max-width: 320px;
+  height: 42px;
+  border-radius: 4px;
+  border: 1px solid blue;
+  padding-left: 20px;
+  color: #9095A1;
+  border: 1px solid #e0e0e0;
+}
+
+.button-login-admin {
+  color: white;
+  background-color: $primary-color;
+  cursor: pointer;
+}
+
+.status-active {
+  color: green;
+  font-weight: bold;
+}
+
+.status-inactive {
+  color: red;
+  font-weight: bold;
+}
+
+.container-phoneVerification,
+.container-sign-in {
+  width: 360px;
+  height: 379px;
+  padding: 24px;
+  border: 1px solid gray;
+  border-radius: 4px;
+  
+  &-title {
+    font-size: 25px;
+    line-height: 19px;
+    color: #000;
+  }
+
+  &-text {
+    font-weight: 500;
+    &-first, &-text {
+      font-size: 14px;
+      line-height: 18px;
+      color: #A0A0A0;
+    }
+
+    &-two {
+      font-size: 13px;
+      color: #565D6D;
+      font-weight: normal;
+    }
+  }
+
+  &-input {
+    width: 299px;
+    height: 44px;
+    padding-left: 20px;
+    border: 1px solid #E0E0E0;
+    border-radius: 4px;
+    color: #9095A1;
+  }
+
+  &-signup {
+    margin-left: 10px;
+    color: #006AFF;
+  }
+
+  &-div {
+    display: flex;
+    color: #565D6D;
+  }
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  cursor: pointer;
+
+  .back-icon {
+    font-size: 14px;
+    color: #000;
+  }
+}
+
+.container-sign-div {
+  display: flex;
+}
+
+.buttonPath-head {
+  background-color: #eee;
+  color: #333;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.buttonPath-head.active {
+  background-color: $primary-color;
+  color: white;
+}
+
+.buttonPath-head-logout {
+  background-color: red;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+}
+.manage {
+  padding: 0 100px;
+  z-index: 1;
+  width: 1200px;
+  &-title {
+    font-size: 25px;
+    line-height: 22px;
+    font-weight: 500;
+    
+    color: #000;
+  }
+
+  &-account {
+    font-size: 20px;
+    line-height: 22px;
+    font-weight: 700;
+    color: #000;
+  }
+
+  &-div,
+  &-employee-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &-create-filter {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    cursor: pointer;
+  }
+
+  &-button {
+    &-create {
+      width: 170px;
+      height: 36px;
+      border: 1px solid #2c7be5;
+      border-radius: 3px;
+      font-size: 15px;
+      line-height: 21px;
+      font-weight: 400;
+      color: #1d80b6;
+      cursor: pointer;
+    }
+
+    &-filter {
+      width: 129px;
+      height: 39px;
+      border: 1px solid #e3e3e3;
+      border-radius: 3px;
+      font-size: 15px;
+      line-height: 20px;
+      font-weight: 400;
+      color: #171a1f;
+      cursor: pointer;
+
+    }
+  }
+
+  &-employee {
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 400;
+  }
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.manage-employee-div {
+  display: grid;
+  text-align: left;
+
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+
+
+.model-title {
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 17px;
+}
+.modal-content {
+  position: relative;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 1000;
+}
+
+
+.modal-content input {
+  width: 423px;
+  height: 72px;
+  border-radius: 8px;
+  border: 1 solid #BCBCBC;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.modal-form-2col {
+  display: flex;
+  gap: 40px;
+}
+
+.form-left,
+.form-right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.form-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.form-item label {
+  text-align: left;
+  width: auto;
+}
+
+.form-item input {
+  width: 250px;
+  height: 36px;
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.modal-actions-button {
+  width: 218px;
+  height: 50px;
+  border-radius: 3px;
+  color: white;
+  font-size: 20px;
+  border: none;
+  line-height: 17px;
+  background-color: #2C7BE5;
+}
+
+.modal-actions-button-canel {
+  width: 218px;
+  height: 50px;
+  border-radius: 3px;
+  color: white;
+  font-size: 20px;
+  border: none;
+  line-height: 17px;
+  border: none;
+  background-color: red;
+}
+
+.employee-div {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  text-align: left;
+  gap: 8px;
+}
+
+
+.employee-edit,
+.employee-delete {
+  font-size: 12px;
+  line-height: 17px;
+  height: 32px;
+  border-radius: 3px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-weight: 400;
+}
+
+.employee-edit {
+  background-color: #2c7be5;
+  width: 50px;
+}
+
+.employee-delete {
+  background-color: #ea5656;
+  width: 83px;
+}
+
+.employee-status {
+  background-color: #e3fef3;
+  color: #16d583;
+  width: 128px;
+  height: 28px;
+  border-radius: 4px;
+  font-size: 11px;
+  line-height: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.employee-name,
+.employee-email {
+  color: #565d6d;
+  font-weight: 400;
+}
+
+.employee-name {
+  font-size: 15px;
+  line-height: 24px;
+}
+
+.employee-email {
+  font-size: 12px;
+  line-height: 20px;
+}
+
+
+
+
