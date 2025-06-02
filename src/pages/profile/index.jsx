@@ -138,15 +138,19 @@ export default function Profile() {
           <p><strong>Email:</strong><br />
             <input className='input-login-admin' name="email" value={formData.email} onChange={handleChange} />
           </p>
-          <p><strong>Chức vụ:</strong><br />
+          <p><strong>Vị trí:</strong><br />
             <input className='input-login-admin' name="position" value={formData.position} onChange={handleChange} />
           </p>
           <p><strong>Số điện thoại:</strong><br />
             <input className='input-login-admin' name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} />
           </p>
-          <p><strong>Vai trò:</strong><br />
-            <input className='input-login-admin' name="role" value={formData.role} onChange={handleChange} />
+          <p>
+            <strong>Vai trò:</strong><br />
+            <div style={{ cursor: 'not-allowed' }} title="Bạn không thể chỉnh trường này" className='input-login-admin'>
+              {formData.role}
+            </div>
           </p>
+
           <button className='button-login-admin' onClick={handleSaveClick}>Lưu</button>
           <button className='buttonPath-head-logout' onClick={handleCancelClick}>Hủy</button>
         </>
