@@ -91,103 +91,105 @@ export default function App() {
   ], [handleLogout])
 
   return (
-    <div className="App">
-      <div style={{ backgroundColor: "pink", display: "flex", justifyContent: "space-evenly", alignItems: "center", gap: "10px", flexWrap: "wrap" }}>
-        {buttons.map(({ path, label, isLogout, onClick }) => {
-          const isActive = path ? location.pathname === path : false;
-          return (
-            <button key={label} style={{ flex: "1 1 120px", minWidth: "120px", maxWidth: "150px" }}
-              className={isLogout ? "buttonPath-head-logout" : isActive ? "buttonPath-head active" : "buttonPath-head"}
-              onClick={isLogout ? onClick : () => navigate(path)}
-            >
-              {label}
-            </button>
-          )
-        })}
+
+      <div className="App">
+        <div style={{ backgroundColor: "pink", display: "flex", justifyContent: "space-evenly", alignItems: "center", gap: "10px", flexWrap: "wrap" }}>
+          {buttons.map(({ path, label, isLogout, onClick }) => {
+            const isActive = path ? location.pathname === path : false;
+            return (
+              <button key={label} style={{ flex: "1 1 120px", minWidth: "120px", maxWidth: "150px" }}
+                className={isLogout ? "buttonPath-head-logout" : isActive ? "buttonPath-head active" : "buttonPath-head"}
+                onClick={isLogout ? onClick : () => navigate(path)}
+              >
+                {label}
+              </button>
+            )
+          })}
+        </div>
+
+        <ProtectedRedirect>
+          <Routes>
+
+            <Route
+              path="/home"
+              element={ <Home /> }
+            />
+
+            <Route
+              path="/registerAdmin"
+              element={ isAuthenticated() ? <Navigate to="/" replace /> : <RegisterAdmin />}
+            />
+
+            {/* <Route
+              path="/loginUser"
+              element={ isAuthenticated() ? <Navigate to="/" replace /> : <LoginUser />}
+            /> */}
+
+            <Route
+              path="/signInPhone"
+              element={ isAuthenticated() ? <Navigate to="/" replace /> : <SignInPhone />}
+            />
+
+            <Route
+              path="/phoneVerification"
+              element={ isAuthenticated() ? <Navigate to="/" replace /> : <PhoneVerification />}
+            />
+
+            <Route
+              path="/signInEmail"
+              element={ isAuthenticated() ? <Navigate to="/" replace /> : <SignInEmail />}
+            />
+
+            <Route
+              path="/emailVerification"
+              element={ isAuthenticated() ? <Navigate to="/" replace /> : <EmailVerification />}
+            />
+
+            <Route
+              path="/setUserAccount"
+              element={ isAuthenticated() ? <Navigate to="/" replace /> : <SetUserAccount /> }
+            />
+
+            {/* <Route
+              path="/profile"
+              element={ isAuthenticated() ? <Profile /> : <Navigate to="/loginUser" replace /> }
+            /> */}
+
+              {/* <Route path="/CreateEmployee" element={
+                isAuthenticated() ? <Navigate to="/" replace /> : <CreateEmployee />
+              } /> */}
+            <Route
+              path="/loginAdmin"
+              element={
+                isAuthenticated()
+                ? (isAdmin() ? <Navigate to="/admin" replace /> : <Navigate to="/" replace />)
+                : <LoginAdmin />
+            } />
+
+            <Route
+              path="/loginUser"
+              element={
+                isAuthenticated()
+                ? (isUser() ? <Navigate to="/profile" replace /> : <Navigate to="/" replace />)
+                : <LoginUser />
+            } />
+
+
+            <Route path="/admin" element={
+              <AdminRoute>
+                <Admin />
+              </AdminRoute>
+            } />
+
+            <Route path="/profile" element={
+              <UserRoute>
+                <Profile />
+              </UserRoute>
+            } />
+
+          </Routes>
+        </ProtectedRedirect>
       </div>
 
-      <ProtectedRedirect>
-        <Routes>
-
-          <Route
-            path="/home"
-            element={ <Home /> }
-          />
-
-          <Route
-            path="/registerAdmin"
-            element={ isAuthenticated() ? <Navigate to="/" replace /> : <RegisterAdmin />}
-          />
-
-          {/* <Route
-            path="/loginUser"
-            element={ isAuthenticated() ? <Navigate to="/" replace /> : <LoginUser />}
-          /> */}
-
-          <Route
-            path="/signInPhone"
-            element={ isAuthenticated() ? <Navigate to="/" replace /> : <SignInPhone />}
-          />
-
-          <Route
-            path="/phoneVerification"
-            element={ isAuthenticated() ? <Navigate to="/" replace /> : <PhoneVerification />}
-          />
-
-          <Route
-            path="/signInEmail"
-            element={ isAuthenticated() ? <Navigate to="/" replace /> : <SignInEmail />}
-          />
-
-          <Route
-            path="/emailVerification"
-            element={ isAuthenticated() ? <Navigate to="/" replace /> : <EmailVerification />}
-          />
-
-          <Route
-            path="/setUserAccount"
-            element={ isAuthenticated() ? <Navigate to="/" replace /> : <SetUserAccount /> }
-          />
-
-          {/* <Route
-            path="/profile"
-            element={ isAuthenticated() ? <Profile /> : <Navigate to="/loginUser" replace /> }
-          /> */}
-
-            {/* <Route path="/CreateEmployee" element={
-              isAuthenticated() ? <Navigate to="/" replace /> : <CreateEmployee />
-            } /> */}
-          <Route
-            path="/loginAdmin"
-            element={
-              isAuthenticated()
-              ? (isAdmin() ? <Navigate to="/admin" replace /> : <Navigate to="/" replace />)
-              : <LoginAdmin />
-          } />
-
-          <Route
-            path="/loginUser"
-            element={
-              isAuthenticated()
-              ? (isUser() ? <Navigate to="/profile" replace /> : <Navigate to="/" replace />)
-              : <LoginUser />
-          } />
-
-
-          <Route path="/admin" element={
-            <AdminRoute>
-              <Admin />
-            </AdminRoute>
-          } />
-
-           <Route path="/profile" element={
-            <UserRoute>
-              <Profile />
-            </UserRoute>
-          } />
-
-        </Routes>
-      </ProtectedRedirect>
-    </div>
   )
 }

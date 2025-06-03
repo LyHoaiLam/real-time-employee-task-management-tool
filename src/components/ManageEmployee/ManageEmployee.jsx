@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { Modal, Form, Input, Button, Select } from 'antd';
+import { jwtDecode }from 'jwt-decode';
+import axios from 'axios';
 import 'react-toastify/dist/ReactToastify.css';
 import Employee from "../Employee/Employee";
 import { employeeAPI } from '../../api';
-
+import ModelChat from '../Model/ModelChat';
 export default function ManageEmployee() {
 
   const [showModal, setShowModal] = useState(false)
@@ -17,6 +19,13 @@ export default function ManageEmployee() {
     role: 'User',
     task: ''
   })
+
+  const [chatModalOpen, setChatModalOpen] = useState(false);
+  const [selectedReceiverId, setSelectedReceiverId] = useState(null);
+  const [chatMessage, setChatMessage] = useState('');
+  
+  const token = localStorage.getItem("token");
+  const adminId = token ? jwtDecode(token).id : null;
 
   const fetchEmployees = async () => {
     try {
@@ -59,7 +68,6 @@ export default function ManageEmployee() {
   const handleDelete = async (id) => {
     try {
       const res = await employeeAPI.delete(id)
-
       toast.success(res.data.message || "Xóa nhân viên thành công!");
       fetchEmployees()
     } catch (error) {
@@ -67,6 +75,30 @@ export default function ManageEmployee() {
       toast.error(error.response?.data?.message || "Xóa nhân viên thất bại!")
     }
   }
+
+  const openChatWithUser = (userId) => {
+    setSelectedReceiverId(userId);
+    setChatModalOpen(true);
+  }
+
+  const sendMessage = async () => {
+    if (!chatMessage.trim()) return;
+
+    try {
+      await axios.post("http://localhost:3000/messages", {
+        senderId: adminId,
+        receiverId: selectedReceiverId,
+        message: chatMessage
+      })
+      toast.success("Đã gửi tin nhắn!");
+      setChatMessage('');
+      setChatModalOpen(false);
+    } catch (error) {
+      console.error(error);
+      toast.error("Gửi tin nhắn thất bại!");
+    }
+}
+
 
   return (
     <div className="manage">
@@ -86,16 +118,30 @@ export default function ManageEmployee() {
         <p className="manage-employee">Email</p>
         <p className="manage-employee">Status</p>
         <p className="manage-employee">Action</p>
-        <p className="manage-employee"></p>
+
       </div>
 
       <div>
         {employees.map((employee) => (
-          <Employee key={employee._id} id={employee._id} name={employee.name} email={employee.email}
-            status={employee.isVerified ? "Active" : "Inactive"}
-            onDelete={handleDelete}
-          />
-        ))}
+          <div>
+            <Employee
+              key={employee._id}
+              id={employee._id}
+              name={employee.name}
+              email={employee.email}
+              status={employee.isVerified ? "Active" : "Inactive"}
+              onDelete={handleDelete}
+            />
+            <button
+              type="primary"
+              className='button-login-admin'
+              onClick={() => openChatWithUser(employee._id)}
+            >
+              Chat vs {employee.name}
+            </button>
+          </div>
+          ))}
+
       </div>
 
       <Modal title="Create New Employee" open={showModal} onCancel={() => setShowModal(false)} onOk={handleCreate} okText="Create" cancelText="Cancel">
@@ -133,6 +179,14 @@ export default function ManageEmployee() {
       </Modal>
 
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="colored" />
+      <ModelChat
+        chatModalOpen={chatModalOpen}
+        setChatModalOpen={setChatModalOpen}
+        chatMessage={chatMessage}
+        setChatMessage={setChatMessage}
+        sendMessage={sendMessage}
+      />
+
     </div>
   )
 }
