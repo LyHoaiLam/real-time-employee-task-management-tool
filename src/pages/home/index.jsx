@@ -14,14 +14,19 @@ import IconAngularJS from "../../assets/Icons/IconAngularJS";
 import IconDjango from "../../assets/Icons/IconDjango";
 import IconVueJS from "../../assets/Icons/IconVueJS";
 import IconNetCore from "../../assets/Icons/IconNetCore";
-
-
 import OrbitIcons from "../../components/Animations/OrbitIcons";
 
+
 export default function Home() {
+
+
     return (
+
+        
         <div className="conatiner">
-            <h1>Welcome to the Home Page</h1>
+           
+
+            
 
              <OrbitIcons
                     icons={[

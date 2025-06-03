@@ -39,7 +39,8 @@ export const taskAPI = {
 
 
 export const chatAPI = {
-  getHistory: (user1, user2) => http.get(`/chats/history?user1=${user1}&user2=${user2}`)
-}
+  getHistory: (user1, user2) => http.get(`/messages/${user1}/${user2}`),
+  sendMessage: (payload) => http.post('/messages', payload),
+};
 
 export default http
